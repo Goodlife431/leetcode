@@ -11,3 +11,17 @@ class Solution(object):
         top_k = [heapq.heappop(heap)[1] for _ in range(k)]
 
         return top_k
+
+# Another way to solve this 
+
+class Solution(object):
+    def topKFrequent(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        counts = {}
+        for num in nums:
+            counts[num] = counts.get(num, 0) + 1
+        return sorted(counts, key=counts.get, reverse=True)[:k]
