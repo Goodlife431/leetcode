@@ -37,3 +37,39 @@ def isInterleave(s1, s2, s3):
             dp[i][j] = (dp[i-1][j] and s1[i-1] == s3[i+j-1]) or (dp[i][j-1] and s2[j-1] == s3[i+j-1])
     
     return dp[m][n]
+
+# Another algorithm way to solve it 
+class Solution(object):
+    def isInterleave(self, s1, s2, s3):
+        """
+        :type s1: str
+        :type s2: str
+        :type s3: str
+        :rtype: bool
+        """
+        memo = {}
+        def checkInterleave(s1, s2, s3, i, j, k, memo):
+        # Base case: If all strings are empty, it's an interleaving
+            if i == len(s1) and j == len(s2) and k == len(s3):
+                return True
+            
+            # Check if the current state has already been computed
+            if (i, j, k) in memo:
+                return memo[(i, j, k)]
+            
+            # Check if the current character of s3 matches with s1
+            if i < len(s1) and s1[i] == s3[k]:
+                if checkInterleave(s1, s2, s3, i + 1, j, k + 1, memo):
+                    memo[(i, j, k)] = True
+                    return True
+            
+            # Check if the current character of s3 matches with s2
+            if j < len(s2) and s2[j] == s3[k]:
+                if checkInterleave(s1, s2, s3, i, j + 1, k + 1, memo):
+                    memo[(i, j, k)] = True
+                    return True
+            
+            # If none of the above cases match, it's not an interleaving
+            memo[(i, j, k)] = False
+            return False
+        return checkInterleave(s1, s2, s3, 0, 0, 0, memo)
