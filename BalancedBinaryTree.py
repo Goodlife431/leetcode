@@ -1,3 +1,7 @@
+# Given a binary tree, determine if it is 
+# height-balanced
+# .
+
 class Solution:
     def isBalanced(self, root):
         if root is None:
