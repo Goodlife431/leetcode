@@ -3,6 +3,10 @@ class ListNode:
         self.val = val
         self.next = next
 
+# Given the head of a singly linked list, return true if it is a 
+# palindrome
+#  or false otherwise.
+
 class solution(object):
     def is_palindrome(head):
         if not head or not head.next:
