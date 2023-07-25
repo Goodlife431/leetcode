@@ -1,3 +1,5 @@
+# Implement pow(x, n), which calculates x raised to the power n (i.e., xn).
+
 class solution(object):
     def myPow(self, x, n):
         result = 1
