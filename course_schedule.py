@@ -3,15 +3,8 @@
 # For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
 # Return true if you can finish all courses. Otherwise, return false.
 
-
-
 class Solution(object):
     def canFinish(self, numCourses, prerequisites):
-        """
-        :type numCourses: int
-        :type prerequisites: List[List[int]]
-        :rtype: bool
-        """
         graph = defaultdict(list)
         in_degree = [0] * numCourses
 
@@ -19,13 +12,10 @@ class Solution(object):
             graph[prereq].append(course)
             in_degree[course] += 1
 
-        # Step 2: Initialize a queue and add nodes with no prerequisites to the queue.
-        queue = deque()
         for course in range(numCourses):
             if in_degree[course] == 0:
                 queue.append(course)
 
-        # Step 3: Perform topological sorting using BFS.
         count = 0
         while queue:
             node = queue.popleft()
@@ -35,6 +25,5 @@ class Solution(object):
                 in_degree[neighbor] -= 1
                 if in_degree[neighbor] == 0:
                     queue.append(neighbor)
-
-        # Step 4: Check if all nodes were processed (no cycle).
+                    
         return count == numCourses
